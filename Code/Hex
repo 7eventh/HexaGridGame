@@ -6,6 +6,8 @@ using UnityEngine;
 [SelectionBase]
 public class Hex : MonoBehaviour
 {
+    // TODO: add a "has been blocked function" to recognize object placed on hex by user. 
+
     [SerializeField]
     private GlowHighlight highlight;
     private HexCoordinates hexCoordinates;
