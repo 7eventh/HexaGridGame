@@ -6,14 +6,17 @@ using UnityEngine;
 [SelectionBase]
 public class Hex : MonoBehaviour
 {
-    // TODO: add a "has been blocked function" to recognize object placed on hex by user. 
-
     [SerializeField]
     private GlowHighlight highlight;
     private HexCoordinates hexCoordinates;
 
     [SerializeField]
     private HexType hexType;
+
+    // Todo: Add function for when player places a trap/fence
+    // Update the Hex 
+    [SerializeField]
+    private IsblockedBy blockedBy;
 
     public Vector3Int HexCoords => hexCoordinates.GetHexCoords();
 
@@ -25,6 +28,16 @@ public class Hex : MonoBehaviour
             HexType.Road => 5,
             _ => throw new Exception($"Hex of type {hexType} not supported")
         };
+        
+    // public bool HasFence()
+    // {
+    //      return this.blockedBy == IsblockedBy.Fence;
+    //      ...........
+    //      ..............
+    // }
+
+
+
 
     public bool IsObstacle()
     {
@@ -65,4 +78,15 @@ public enum HexType
     Road,
     Water,
     Obstacle
+}
+
+public enum IsblockedBy 
+{
+    Empty,
+    Fence,
+    Bomb,
+    Tree, 
+    Hole,
+    Mud,
+    Animals
 }
