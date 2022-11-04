@@ -13,12 +13,21 @@ public class Hex : MonoBehaviour
     [SerializeField]
     private HexType hexType;
 
-    // Todo: Add function for when player places a trap/fence
-    // Update the Hex 
     [SerializeField]
     private IsblockedBy blockedBy;
 
-    public Vector3Int HexCoords => hexCoordinates.GetHexCoords();
+    public Vector3Int HexCoords => hexCoordinates.GetHexCoords(); 
+
+    
+    // If the hex changes ex. has obstacle, trap etc. Update the tag
+    private void Update() 
+    {
+        if (this.hexType == HexType.Obstacle)
+        {
+            gameObject.tag = "Obstacle"; 
+        }    
+        // Add more condidtions for when it is not an obstacle or a semiobstacle. 
+    }
 
     public int GetCost()
         => hexType switch
@@ -28,16 +37,6 @@ public class Hex : MonoBehaviour
             HexType.Road => 5,
             _ => throw new Exception($"Hex of type {hexType} not supported")
         };
-        
-    // public bool HasFence()
-    // {
-    //      return this.blockedBy == IsblockedBy.Fence;
-    //      ...........
-    //      ..............
-    // }
-
-
-
 
     public bool IsObstacle()
     {
@@ -45,7 +44,8 @@ public class Hex : MonoBehaviour
     }
 
     private void Awake()
-    {
+    {   // On awake set all tags to empty 
+        gameObject.tag = "Empty";
         hexCoordinates = GetComponent<HexCoordinates>();
         highlight = GetComponent<GlowHighlight>();
     }
@@ -82,11 +82,9 @@ public enum HexType
 
 public enum IsblockedBy 
 {
-    Empty,
+    None,
     Fence,
     Bomb,
     Tree, 
-    Hole,
-    Mud,
-    Animals
+    hole
 }
