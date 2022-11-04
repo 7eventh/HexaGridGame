@@ -28,13 +28,15 @@ public class PlayerInput : MonoBehaviour
         }
 
         // Get information about object by shooting rays 
-        if (Physics.Raycast(ray, out hitInfo))
+        if (Input.GetMouseButtonDown(0))
         {
-            var selection = hitInfo.transform;
             // IF player clicks a hex compare the tags.
             // Depending on if the hax is empty do something.
-            if (Input.GetMouseButtonDown(0))
+            if (Physics.Raycast(ray, out hitInfo)) 
             {   
+                var selection = hitInfo.transform;
+                selection.GetComponent<GlowHighlight>();
+
                 if (selection.CompareTag(Ostcl))
                 {
                     Debug.Log("Has Obstacle");   
@@ -42,7 +44,21 @@ public class PlayerInput : MonoBehaviour
                 // If is empty allow player to place a trap. (If available)
                 else if (selection.CompareTag(Empt))
                 {
-                    Debug.Log("Empty");
+                    // If hex tag == epty and playerHasObstacles
+                    // Spawn players Obstacle + Animation later 
+                    // else if tag == notEmpty and playerHasObstacle
+                    // say you cant place obstcl here
+                    // else if not playerHasObstacle
+                    // say you have no obstacles
+
+                    if (selection.GetComponent<GlowHighlight>().isGlowing == false)
+                    {
+                        selection.GetComponent<GlowHighlight>().ToggleGlow(true);
+                    }
+                    else
+                    {
+                        selection.GetComponent<GlowHighlight>().ToggleGlow();
+                    }
                 }
             }
         }   
