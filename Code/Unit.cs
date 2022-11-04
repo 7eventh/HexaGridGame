@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour
     [SerializeField]
     private int movementPoints = 20;
     public int MovementPoints { get => movementPoints; }
+    public bool isUnitSelected = false;
 
     [SerializeField]
     private float movementDuration = 1, rotationDuration = 0.3f;
@@ -25,12 +26,16 @@ public class Unit : MonoBehaviour
 
     public void Deselect()
     {
+        isUnitSelected = false;
         glowHighlight.ToggleGlow(false);
+        Debug.Log("Unit is NOT selected!");
     }
 
     public void Select()
     {
+        isUnitSelected = true;
         glowHighlight.ToggleGlow();
+        Debug.Log("Unit selected!");
     }
 
     public void MoveThroughPath(List<Vector3> currentPath)
