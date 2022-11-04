@@ -12,7 +12,7 @@ public class GlowHighlight : MonoBehaviour
 
     public Material glowMaterial;
 
-    private bool isGlowing = false;
+    public bool isGlowing = false;
 
     private Color validSpaceColor = Color.green;
     private Color originalGlowColor;
