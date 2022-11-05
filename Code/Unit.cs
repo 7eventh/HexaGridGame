@@ -9,7 +9,6 @@ public class Unit : MonoBehaviour
     [SerializeField]
     private int movementPoints = 20;
     public int MovementPoints { get => movementPoints; }
-    public bool isUnitSelected = false;
 
     [SerializeField]
     private float movementDuration = 1, rotationDuration = 0.3f;
@@ -19,6 +18,7 @@ public class Unit : MonoBehaviour
 
     public event Action<Unit> MovementFinished;
 
+
     private void Awake()
     {
         glowHighlight = GetComponent<GlowHighlight>();
@@ -26,17 +26,14 @@ public class Unit : MonoBehaviour
 
     public void Deselect()
     {
-        isUnitSelected = false;
         glowHighlight.ToggleGlow(false);
-        Debug.Log("Unit is NOT selected!");
     }
 
     public void Select()
-    {
-        isUnitSelected = true;
+    {   
         glowHighlight.ToggleGlow();
-        Debug.Log("Unit selected!");
     }
+
 
     public void MoveThroughPath(List<Vector3> currentPath)
     {
@@ -84,13 +81,13 @@ public class Unit : MonoBehaviour
 
         if (pathPositions.Count > 0)
         {
-            Debug.Log("Selecting the next position!");
+            // Debug.Log("Selecting the next position!");
             StartCoroutine(RotationCoroutine(pathPositions.Dequeue(), rotationDuration));
         }
         else
         {
-            Debug.Log("Movement finished!");
+            // Debug.Log("Movement finished!");
             MovementFinished?.Invoke(this);
         }
     }
-}
+} 
