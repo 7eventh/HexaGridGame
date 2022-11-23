@@ -43,7 +43,8 @@ public class PlayerInput : MonoBehaviour
 
                     if (selection.CompareTag(Ostcl))
                     {
-                        // Debug.Log("Has Obstacle");   
+                        // Take the info and show it to the user 
+                        Debug.Log("Has Obstacle");   
                     }
                     // If is empty allow player to place a trap. (If available)
                     else if (selection.CompareTag(Empt))
